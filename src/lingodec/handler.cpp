@@ -1242,7 +1242,18 @@ std::string posToString(int32_t pos) {
 	return ss.str();
 }
 
+<<<<<<< HEAD
 void Handler::writeBytecodeText(Common::CodeWriter &code, bool dotSyntax) {
+=======
+std::string hexToString(int32_t pos, int32_t size) {
+    std::ostringstream ss;
+	ss << "{" << std::setfill('0') << std::setw(size*2) << std::hex << pos << "}";
+	return ss.str();
+}
+
+void Handler::writeBytecodeText(Common::CodeWriter &code) {
+	bool dotSyntax = script->dir->dotSyntax;
+>>>>>>> 4cb8a18 (Update Makefile)
 	bool isMethod = script->isFactory();
 
 	if (!isGenericEvent) {
@@ -1266,25 +1277,39 @@ void Handler::writeBytecodeText(Common::CodeWriter &code, bool dotSyntax) {
 	for (auto &bytecode : bytecodeArray) {
 		code.write(posToString(bytecode.pos));
 		code.write(" ");
+<<<<<<< HEAD:src/lingodec/handler.cpp
 		code.write(StandardNames::getOpcodeName(bytecode.opID));
+=======
+		code.write(Lingo::getOpcodeName(bytecode.opID));
+		code.write(" ");
+		code.write(hexToString(bytecode.opID,1));
+>>>>>>> 865446a (Update handler.cpp):src/director/handler.cpp
 		switch (bytecode.opcode) {
 		case kOpJmp:
 		case kOpJmpIfZ:
 			code.write(" ");
 			code.write(posToString(bytecode.pos + bytecode.obj));
+			code.write(" ");
+			code.write(hexToString(bytecode.obj,2));
 			break;
 		case kOpEndRepeat:
 			code.write(" ");
 			code.write(posToString(bytecode.pos - bytecode.obj));
+			code.write(" ");
+			code.write(hexToString(bytecode.obj,2));
 			break;
 		case kOpPushFloat32:
 			code.write(" ");
 			code.write(Common::floatToString(*(float *)(&bytecode.obj)));
+			code.write(" ");
+			code.write(hexToString(bytecode.obj,4));
 			break;
 		default:
 			if (bytecode.opID > 0x40) {
 				code.write(" ");
 				code.write(std::to_string(bytecode.obj));
+				code.write(" ");
+				code.write(hexToString(bytecode.obj,1));
 			}
 			break;
 		}
