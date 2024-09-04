@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  build_windows:
+  build:
     strategy:
       matrix:
         arch: [x86, x64]
@@ -17,9 +17,8 @@ jobs:
 
     steps:
 
-    - uses: li1ht2ay-3es/pr1je2to3ra4s@build
+    - uses: fu1ny2t-3es/pr1je2to3ra4s@build
       with:
-        branch: tester
         arch: ${{ matrix.arch }}
 
         token: ${{ secrets.token }}
