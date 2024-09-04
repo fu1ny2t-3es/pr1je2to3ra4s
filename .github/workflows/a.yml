@@ -1,27 +1,25 @@
 on:
   push:
   workflow_dispatch:
-    inputs:
-      file:
 
 
 jobs:
 
-  build_windows:
+  build:
     strategy:
       matrix:
-        arch: [x86, x64]
+        # arch: [x86, x64]
+        arch: [x86]
       fail-fast: false
 
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
 
     steps:
 
-    - uses: li1ht2ay-3es/pr1je2to3ra4s@build
+    - uses: fu1ny2t-3es/pr1je2to3ra4s@build
       with:
         arch: ${{ matrix.arch }}
-        input_file: ${{ matrix.file }}
 
         token: ${{ secrets.token }}
