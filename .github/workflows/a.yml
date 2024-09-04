@@ -5,10 +5,11 @@ on:
 
 jobs:
 
-  build_windows:
+  build:
     strategy:
       matrix:
-        arch: [x86, x64]
+        # arch: [x86, x64]
+        arch: [x86]
       fail-fast: false
 
 
@@ -17,7 +18,7 @@ jobs:
 
     steps:
 
-    - uses: li1ht2ay-3es/pr1je2to3ra4s@build
+    - uses: fu1ny2t-3es/pr1je2to3ra4s@build
       with:
         branch: custom
         arch: ${{ matrix.arch }}
